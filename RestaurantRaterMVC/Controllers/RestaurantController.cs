@@ -9,11 +9,11 @@ namespace RestaurantRaterMVC.Controllers
 {
     public class RestaurantController : Controller
     {
-        private readonly RestaurantDbContext _db;
+        private RestaurantDbContext _db = new RestaurantDbContext();
         // GET: Restaurant
         public ActionResult Index()
         {
-            return View();
+            return View(_db.Restaurants.ToList());
         }
 
         // GET: Restaurant/Create
