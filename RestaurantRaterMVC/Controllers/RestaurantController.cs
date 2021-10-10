@@ -26,7 +26,6 @@ namespace RestaurantRaterMVC.Controllers
         // POST: Restaurant/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
-
         public ActionResult Create(Restaurant restaurant)
         {
             if (ModelState.IsValid)
@@ -37,6 +36,22 @@ namespace RestaurantRaterMVC.Controllers
 
             }
 
+            return View(restaurant);
+        }
+
+        // GET: Restaurant/Delete/{id}
+
+        public ActionResult Detlete(int? id)
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(System.Net.HttpStatusCode.BadRequest);
+            }
+            Restaurant restaurant = _db.Restaurants.Find(id);
+            if (restaurant == null)
+            {
+                return HttpNotFound();
+            }
             return View(restaurant);
         }
     }
