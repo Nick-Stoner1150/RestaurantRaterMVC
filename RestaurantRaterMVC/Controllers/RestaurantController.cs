@@ -41,7 +41,7 @@ namespace RestaurantRaterMVC.Controllers
 
         // GET: Restaurant/Delete/{id}
 
-        public ActionResult Detlete(int? id)
+        public ActionResult Delete(int? id)
         {
             if (id == null)
             {
@@ -53,6 +53,17 @@ namespace RestaurantRaterMVC.Controllers
                 return HttpNotFound();
             }
             return View(restaurant);
+        }
+
+        // POST: Restaurant/Delete/{id}
+        [HttpPost, ActionName("Delete")]
+        [ValidateAntiForgeryToken]
+        public ActionResult Delete(int id)
+        {
+            Restaurant restaurant = _db.Restaurants.Find(id);
+            _db.Restaurants.Remove(restaurant);
+            _db.SaveChanges();
+            return RedirectToAction("Index");
         }
     }
 }
